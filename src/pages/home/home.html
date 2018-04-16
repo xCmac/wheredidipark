@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title></ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <button ion-button icon-only full large tappable color="secondary" (click)="increase()">
+                <ion-icon name="arrow-up"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <h1>{{floor}}</h1>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <button ion-button icon-only full large tappable color="secondary" (click)="decrease()" [disabled]="!isValidFloor()">
+              <ion-icon name="arrow-down"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>
