@@ -39,6 +39,11 @@
     <div *ngSwitchCase="'register'">
       <ion-list>
         <ion-item>
+          <ion-label fixed>Username</ion-label>
+          <ion-input [(ngModel)]="username" type="text" value=""></ion-input>
+        </ion-item>
+
+        <ion-item>
           <ion-label fixed>Email</ion-label>
           <ion-input [(ngModel)]="email" type="text" value=""></ion-input>
         </ion-item>

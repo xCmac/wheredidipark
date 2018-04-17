@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import Backendless from 'backendless';
+import { BackendProvider } from '../../providers/backend/backend';
 
 @IonicPage()
 @Component({
@@ -13,9 +14,11 @@ export class AuthenticationPage {
 
   email: string = "t@t.com";
   password: string = "password";
+  username: string = "t";
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
+              private backendProvider: BackendProvider,
               private toastCtrl: ToastController) {
   }
 
@@ -25,8 +28,9 @@ export class AuthenticationPage {
 
   login() {
     Backendless.UserService.login(this.email, this.password)
-    .then(data => {
-      console.log(data)
+    .then(user => {
+      this.backendProvider.user = user
+      console.log(user)
       this.navCtrl.setRoot('TabsPage');
     })
     .catch(error => {
@@ -38,9 +42,11 @@ export class AuthenticationPage {
     let user: Backendless.User = new Backendless.User;
     user.email = this.email;
     user.password = this.password;
+    user.username = this.username;
     Backendless.UserService.register(user)
-    .then(data => {
-      console.log("data");
+    .then(user => {
+      this.backendProvider.user = user
+      console.log(user);
     })
     .catch(error => {
       this.presentToast(error);
