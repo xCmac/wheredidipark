@@ -15,13 +15,15 @@ export class BackendProvider {
     const query: Backendless.DataQueryBuilder = Backendless.DataQueryBuilder
                                                   .create()
                                                   .setWhereClause(`ownerId='${this.user.objectId}'`);
-    // console.log("Query: ", query.getWhereClause());
     this.floorDataStore.find(query).then(data => {
-      if(data) {
-        console.log("Got data: ", data);
+      let floors: Array<Floor> = data as Array<Floor>
+      if (floors.length > 0) {
+        console.log("Have data: ", floors);
+        let floor: Floor = new Floor(newFloor, floors[0].created, floors[0].objectId, floors[0].ownerId);
+        this.floorDataStore.save(floor);
       } else {
-        console.log("No Data");;
-        let floor: Floor = new Floor(newFloor)
+        console.log("No data, creating one");
+        let floor: Floor = new Floor(newFloor);
         this.floorDataStore.save(floor);
       }
     })
@@ -29,5 +31,4 @@ export class BackendProvider {
       console.log("Error updating: ", error);
     })
   }
-
 }

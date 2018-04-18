@@ -30,7 +30,7 @@ export class AuthenticationPage {
     Backendless.UserService.login(this.email, this.password)
     .then(user => {
       this.backendProvider.user = user
-      console.log(user)
+      console.log(this.backendProvider.user)
       this.navCtrl.setRoot('TabsPage');
     })
     .catch(error => {
