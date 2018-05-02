@@ -49,6 +49,7 @@ export class LoginPage {
   async login() {
     this.user = await this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password);
     if(this.user) {
+      console.log(this.user);
       this.navCtrl.setRoot('TabsPage');
     }
   }
@@ -56,6 +57,7 @@ export class LoginPage {
   async register() {
     this.user = await this.afAuth.auth.createUserWithEmailAndPassword(this.email, this.password);
     if(this.user) {
+      console.log(this.user)
       this.navCtrl.setRoot('TabsPage');
     }
   }
@@ -70,8 +72,13 @@ export class LoginPage {
     toast.present();
   }
 
-  isValid(): boolean {
-    return true;
+  isvalidForLogin(): boolean {
+    return this.loginForm.valid;
+    
+  }
+
+  isValidForRegistration(): boolean {
+    return this.registerForm.valid;
   }
 
 }

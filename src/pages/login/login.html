@@ -44,7 +44,7 @@
           </ion-item>
 
           <ion-item>
-              <button ion-button full large tappable (click)="login()" [disabled]="!isValid()">Login</button>
+              <button ion-button full large tappable (click)="login()" [disabled]="!isvalidForLogin()">Login</button>
           </ion-item>
         </ion-list>
       </form>
@@ -87,7 +87,7 @@
           </ion-item>
 
           <ion-item>
-            <button ion-button full large tappable (click)="register()" [disabled]="!isValid()">Register</button>
+            <button ion-button full large tappable (click)="register()" [disabled]="!isValidForRegistration()">Register</button>
           </ion-item>
         </ion-list>
       </form>
