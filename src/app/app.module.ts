@@ -5,7 +5,12 @@ import { MyApp } from './app.component';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { BackendProvider } from '../providers/backend/backend';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { FIREBASE_CREDENTIALS } from "./firebase.credentials";
+
 
 @NgModule({
   declarations: [
@@ -13,7 +18,11 @@ import { BackendProvider } from '../providers/backend/backend';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(FIREBASE_CREDENTIALS),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
+    AngularFirestoreModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -22,8 +31,8 @@ import { BackendProvider } from '../providers/backend/backend';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    BackendProvider
+    AngularFireAuthModule,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}

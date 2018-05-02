@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, IonicApp, IonicPage } from 'ionic-angular';
-import { BackendProvider } from '../../providers/backend/backend';
+import { NavController, IonicPage } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -10,12 +9,11 @@ import { BackendProvider } from '../../providers/backend/backend';
 export class HomePage {
   floor: number = 1;
 
-  constructor(public navCtrl: NavController, private backendProvider: BackendProvider) {
+  constructor(public navCtrl: NavController) {
   }
 
   increase() {
     this.floor += 1;
-    this.backendProvider.updateFloor(this.floor);
   }
 
   decrease() {
@@ -25,7 +23,6 @@ export class HomePage {
       this.floor = 1
     }
 
-    this.backendProvider.updateFloor(this.floor);
   }
 
   isValidFloor(): boolean {

@@ -1,0 +1,97 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title></ion-title>
+  </ion-navbar>
+  <ion-toolbar no-border-top>
+      <ion-segment [(ngModel)]="loginOrRegister">
+        <ion-segment-button value="login">
+          Login
+        </ion-segment-button>
+        <ion-segment-button value="register">
+          Register
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div [ngSwitch]="loginOrRegister">
+    <div *ngSwitchCase="'login'">
+      <form [formGroup]="loginForm" novalidate>
+        <ion-list>
+          <ion-item>
+            <ion-label fixed>Email</ion-label>
+            <ion-input formControlName="email" [(ngModel)]="email" type="text" value=""></ion-input>
+          </ion-item>
+          
+          <ion-item class="error-message" *ngIf="!loginForm.controls.email.valid && loginForm.controls.email.dirty">
+            <p>
+              Enter a valid email address
+            </p>
+          </ion-item>
+          
+          <ion-item>
+            <ion-label fixed>Password</ion-label>
+            <ion-input formControlName="password" [(ngModel)]="password" type="password"></ion-input>
+          </ion-item>
+
+          <ion-item class="error-message" *ngIf="!loginForm.controls.password.valid && loginForm.controls.password.dirty">
+            <p>
+              Password Required
+            </p>
+          </ion-item>
+
+          <ion-item>
+              <button ion-button full large tappable (click)="login()" [disabled]="!isValid()">Login</button>
+          </ion-item>
+        </ion-list>
+      </form>
+    </div>
+
+    <div *ngSwitchCase="'register'">
+      <form [formGroup]="registerForm" novalidate>
+        <ion-list>
+          <ion-item>
+            <ion-label fixed>Name</ion-label>
+            <ion-input formControlName="name"[(ngModel)]="name" type="text" value=""></ion-input>
+          </ion-item>
+
+          <ion-item class="error-message" *ngIf="!registerForm.controls.name.valid && registerForm.controls.name.dirty">
+            <p>
+              Name Required
+            </p>
+          </ion-item>
+
+          <ion-item>
+            <ion-label fixed>Email</ion-label>
+            <ion-input formControlName="email" [(ngModel)]="email" type="text" value=""></ion-input>
+          </ion-item>
+
+          <ion-item class="error-message" *ngIf="!registerForm.controls.email.valid && registerForm.controls.email.dirty">
+            <p>
+              Enter a valid email address
+            </p>
+          </ion-item>
+          
+          <ion-item>
+            <ion-label fixed>Password</ion-label>
+            <ion-input formControlName="password" [(ngModel)]="password" type="password"></ion-input>
+          </ion-item>
+
+          <ion-item class="error-message" *ngIf="!registerForm.controls.password.valid && registerForm.controls.password.dirty">
+            <p>
+              Password Required
+            </p>
+          </ion-item>
+
+          <ion-item>
+            <button ion-button full large tappable (click)="register()" [disabled]="!isValid()">Register</button>
+          </ion-item>
+        </ion-list>
+      </form>
+    </div>
+  </div>
+
+</ion-content>
