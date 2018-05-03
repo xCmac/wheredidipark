@@ -1,6 +1,6 @@
 {
   "name": "wheredidipark",
-  "app_id": "",
+  "app_id": "bde58e4f",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
