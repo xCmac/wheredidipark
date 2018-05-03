@@ -4,7 +4,8 @@ import { ToastController } from 'ionic-angular';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from '@firebase/auth-types';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { User, UserInfo } from '@firebase/auth-types';
 
 @IonicPage()
 @Component({
@@ -14,7 +15,8 @@ import { User } from '@firebase/auth-types';
 export class LoginPage {
 
   loginOrRegister: string = 'login';
-  name: string;
+
+  
   email: string;
   password: string;
 
@@ -22,11 +24,16 @@ export class LoginPage {
   loginForm: FormGroup;
   registerForm: FormGroup;
 
+  usersCollection: AngularFirestoreCollection<UserInfo>
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private formBuilder: FormBuilder,
     private afAuth: AngularFireAuth,
+    private afs: AngularFirestore,
     private toastCtrl: ToastController) {
+    
+    this.usersCollection = this.afs.collection('users/');
   }
 
   ngOnInit() {
@@ -36,30 +43,54 @@ export class LoginPage {
     });
 
     this.registerForm = this.formBuilder.group({
-      name: ['', Validators.compose([Validators.required])],
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.required])]
     });
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AuthenticationPage');
+    this.afAuth.authState.subscribe(user => {
+      if(user) {
+        this.navCtrl.setRoot('TabsPage');
+      }
+    });
+  }
+
+  checkForSavedCredentials() {
+    //so we can skip login
   }
 
   async login() {
-    this.user = await this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password);
-    if(this.user) {
-      console.log(this.user);
-      this.navCtrl.setRoot('TabsPage');
+    try {
+      this.user = await this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password);
+      if (this.user) {
+        console.log(this.user);
+        this.navCtrl.setRoot('TabsPage');
+      }
+    } catch (e) {
+      this.presentToast(e);
     }
+
   }
 
   async register() {
-    this.user = await this.afAuth.auth.createUserWithEmailAndPassword(this.email, this.password);
-    if(this.user) {
-      console.log(this.user)
-      this.navCtrl.setRoot('TabsPage');
+    try {
+      this.user = await this.afAuth.auth.createUserWithEmailAndPassword(this.email, this.password);
+      if (this.user) {
+        console.log(this.user)
+        this.usersCollection.add({ email: this.email, 
+                                    uid: this.user.uid, 
+                                    displayName: this.user.displayName,
+                                    phoneNumber: this.user.phoneNumber, 
+                                    photoURL: this.user.photoURL, 
+                                    providerId: this.user.providerId
+                                  });
+        this.navCtrl.setRoot('TabsPage');
+      }
+    } catch (e) {
+      this.presentToast(e);
     }
+
   }
 
   presentToast(message: string) {

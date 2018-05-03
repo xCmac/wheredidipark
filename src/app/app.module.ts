@@ -10,6 +10,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { FIREBASE_CREDENTIALS } from "./firebase.credentials";
+import { FloorProvider } from '../providers/floor/floor';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { FIREBASE_CREDENTIALS } from "./firebase.credentials";
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(FIREBASE_CREDENTIALS),
+    AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     AngularFirestoreModule
@@ -32,7 +34,8 @@ import { FIREBASE_CREDENTIALS } from "./firebase.credentials";
     StatusBar,
     SplashScreen,
     AngularFireAuthModule,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    FloorProvider
   ]
 })
 export class AppModule {}
