@@ -1,3 +1,21 @@
-page-login {
+.login {
+    background-color: color($colors, dark);
 
+    ion-grid {
+        height: 100%;
+    }
+
+    ion-row {
+        height: 100%;
+    }
+
+    ion-item {
+        background-color: color($colors, dark);
+        padding: 0;
+    }
+
+    .login-form {
+        width: 80%;
+    }
 }
+

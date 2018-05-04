@@ -14,7 +14,7 @@ import { User, UserInfo } from '@firebase/auth-types';
 })
 export class LoginPage {
 
-  loginOrRegister: string = 'login';
+  isLogin: boolean = true;
 
   
   email: string;
@@ -112,4 +112,7 @@ export class LoginPage {
     return this.registerForm.valid;
   }
 
+  toggleLoginOrRegister() {
+    this.isLogin = !this.isLogin;
+  }
 }
