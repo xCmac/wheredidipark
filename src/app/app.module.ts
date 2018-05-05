@@ -19,7 +19,11 @@ import { FloorProvider } from '../providers/floor/floor';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      scrollPadding: false,
+      scrollAssist: true,
+      autoFocusAssist: false
+    }),
     AngularFireModule.initializeApp(FIREBASE_CREDENTIALS),
     AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,

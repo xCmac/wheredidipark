@@ -14,7 +14,7 @@ import { User, UserInfo } from '@firebase/auth-types';
 })
 export class LoginPage {
 
-  loginOrRegister: string = 'login';
+  isLogin: boolean = true;
 
   
   email: string;
@@ -49,11 +49,11 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
-    this.afAuth.authState.subscribe(user => {
-      if(user) {
-        this.navCtrl.setRoot('TabsPage');
-      }
-    });
+    // this.afAuth.authState.subscribe(user => {
+    //   if(user) {
+    //     this.navCtrl.setRoot('TabsPage');
+    //   }
+    // });
   }
 
   async login() {
@@ -108,4 +108,7 @@ export class LoginPage {
     return this.registerForm.valid;
   }
 
+  toggleLoginOrRegister() {
+    this.isLogin = !this.isLogin;
+  }
 }
