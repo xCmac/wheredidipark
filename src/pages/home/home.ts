@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, IonicPage } from 'ionic-angular';
+import { NavController, IonicPage, PopoverController } from 'ionic-angular';
 import { FloorProvider } from '../../providers/floor/floor';
 
 @IonicPage()
@@ -10,11 +10,13 @@ import { FloorProvider } from '../../providers/floor/floor';
 export class HomePage {
   floor: number = 1;
 
-  constructor(public navCtrl: NavController, private floorProvider: FloorProvider) {
+  constructor(public navCtrl: NavController, 
+              public popoverCtrl: PopoverController, 
+              private floorProvider: FloorProvider) {
   }
 
   ionViewDidLoad() {
-    
+
   }
 
   increase() {
@@ -35,6 +37,14 @@ export class HomePage {
 
   isValidFloor(): boolean {
     return this.floor > 1;
+  }
+
+  presentMorePopoverPage(ev: UIEvent) {
+    let popover = this.popoverCtrl.create('MorePopoverPage');
+    popover.present({
+      ev: ev
+    });
+
   }
 
 }

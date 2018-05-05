@@ -56,10 +56,6 @@ export class LoginPage {
     });
   }
 
-  checkForSavedCredentials() {
-    //so we can skip login
-  }
-
   async login() {
     try {
       this.user = await this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password);
