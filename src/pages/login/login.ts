@@ -49,11 +49,11 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
-    this.afAuth.authState.subscribe(user => {
-      if(user) {
-        this.navCtrl.setRoot('TabsPage');
-      }
-    });
+    // this.afAuth.authState.subscribe(user => {
+    //   if(user) {
+    //     this.navCtrl.setRoot('TabsPage');
+    //   }
+    // });
   }
 
   checkForSavedCredentials() {

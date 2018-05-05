@@ -4,6 +4,9 @@
 
 <ion-content padding color="dark" class="login">
   <ion-grid>
+    <ion-row align-items-center justify-content-center class="title">
+      Where did I park?
+    </ion-row>
     <ion-row align-items-center justify-content-center>
       <div class="login-form">
           <div [ngSwitch]="isLogin">
@@ -11,32 +14,26 @@
                 <form [formGroup]="loginForm" novalidate>
                   <ion-list>
                     <ion-item>
-                      <ion-label floating><ion-icon name="person"></ion-icon> Email</ion-label>
+                      <ion-label floating><ion-icon name="person"></ion-icon>  Email</ion-label>
                       <ion-input formControlName="email" [(ngModel)]="email" type="text" value=""></ion-input>
                     </ion-item>
                     
-                    <ion-item class="error-message" *ngIf="!loginForm.controls.email.valid && loginForm.controls.email.dirty">
-                      <p>
-                        Enter a valid email address
-                      </p>
-                    </ion-item>
+                    <p class="error-message" *ngIf="!loginForm.controls.email.valid && loginForm.controls.email.dirty">
+                      Enter a valid email address
+                    </p>
                     
                     <ion-item>
-                      <ion-label floating><ion-icon name="lock"></ion-icon> Password</ion-label>
+                      <ion-label floating><ion-icon name="lock"></ion-icon>  Password</ion-label>
                       <ion-input formControlName="password" [(ngModel)]="password" type="password"></ion-input>
                     </ion-item>
           
-                    <ion-item class="error-message" *ngIf="!loginForm.controls.password.valid && loginForm.controls.password.dirty">
-                      <p>
-                        Password Required
-                      </p>
-                    </ion-item>
-          
-                    <ion-item>
-                        <button ion-button full large tappable (click)="login()" [disabled]="!isvalidForLogin()" color="secondary">Login</button>
-                    </ion-item>
-          
-                    <ion-item>
+                    <p class="error-message" *ngIf="!loginForm.controls.password.valid && loginForm.controls.password.dirty">
+                      Password Required
+                    </p>
+
+                    <button ion-button full large tappable round (click)="login()" [disabled]="!isvalidForLogin()" class="login-button">Log in</button>
+
+                    <ion-item class="switch-text">
                       First time?
                       <button detail-none (click)="toggleLoginOrRegister()">Sign up here</button>
                     </ion-item>
@@ -48,32 +45,26 @@
                 <form [formGroup]="registerForm" novalidate>
                   <ion-list>
                     <ion-item>
-                        <ion-label floating><ion-icon name="person"></ion-icon> Email</ion-label>
+                        <ion-label floating><ion-icon name="person"></ion-icon>  Email</ion-label>
                       <ion-input formControlName="email" [(ngModel)]="email" type="text" value=""></ion-input>
                     </ion-item>
           
-                    <ion-item class="error-message" *ngIf="!registerForm.controls.email.valid && registerForm.controls.email.dirty">
-                      <p>
-                        Enter a valid email address
-                      </p>
-                    </ion-item>
+                    <p class="error-message" *ngIf="!registerForm.controls.email.valid && registerForm.controls.email.dirty">
+                      Enter a valid email address
+                    </p>
                     
                     <ion-item>
-                        <ion-label floating><ion-icon name="lock"></ion-icon> Password</ion-label>
+                        <ion-label floating><ion-icon name="lock"></ion-icon>  Password</ion-label>
                       <ion-input formControlName="password" [(ngModel)]="password" type="password"></ion-input>
                     </ion-item>
-          
-                    <ion-item class="error-message" *ngIf="!registerForm.controls.password.valid && registerForm.controls.password.dirty">
-                      <p>
-                        Password Required
-                      </p>
-                    </ion-item>
-          
-                    <ion-item>
-                      <button ion-button full large tappable (click)="register()" [disabled]="!isValidForRegistration()">Register</button>
-                    </ion-item>
-          
-                    <ion-item>
+
+                    <p class="error-message" *ngIf="!registerForm.controls.password.valid && registerForm.controls.password.dirty">
+                      Password Required
+                    </p>
+
+                    <button ion-button full large tappable round (click)="register()" [disabled]="!isValidForRegistration()" class="login-button">Register</button>
+
+                    <ion-item class="switch-text">
                       Already a user?
                       <button detail-none (click)="toggleLoginOrRegister()">Sign in here</button>
                     </ion-item>

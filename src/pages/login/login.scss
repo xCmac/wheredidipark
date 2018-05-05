@@ -1,6 +1,12 @@
 .login {
     background-color: color($colors, dark);
 
+    .title {
+        font-size: 3rem;
+        font-weight: bold;
+        color: white;
+    }
+
     ion-grid {
         height: 100%;
     }
@@ -12,10 +18,52 @@
     ion-item {
         background-color: color($colors, dark);
         padding: 0;
+
+        .item-inner {
+            border-bottom-color: #63818e !important;
+        }
+    }
+
+    .list-ios > .item-block:first-child {
+        border-top: none;
+    } 
+    .list-ios .item-block:last-child {
+        border-bottom: none;
+    }
+
+    ion-label {
+        color: color($colors, text) !important;
+    }
+
+    ion-icon {
+        color: white;
+        width: 1em;
+    }
+
+    .login-button {
+        margin: 50px 0 0 0;
+        background-color: white;
+        color: color($colors, primary);
+        font-weight: bold;
     }
 
     .login-form {
         width: 80%;
+    }
+
+    .switch-text {
+        font-size: 1.5rem;
+
+        ion-label {
+            display: flex;
+            justify-content: center;
+        }
+
+        button {
+            background-color: color($colors, dark);
+            font-size: 1.5rem;
+            color: white;
+        }
     }
 }
 
