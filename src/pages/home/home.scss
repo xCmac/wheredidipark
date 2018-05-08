@@ -1,4 +1,6 @@
-page-home {
+.page-home {
+    color: white;
+
     .scroll-content {
         display: table !important;
         width: 100% !important;
@@ -9,5 +11,23 @@ page-home {
         display: table-cell;
         vertical-align: middle;
         text-align: center;
+    }
+
+    button {
+        background-color: color($colors, text);
+        color: color($colors, dark);
+    }
+
+    ion-grid {
+        height: 82%;
+    }
+
+    ion-icon {
+        font-size: 4rem;
+    }
+
+    .floor {
+        font-size: 25rem;
+        flex-grow: 1;
     }
 }

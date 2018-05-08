@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header no-border>
   <ion-toolbar>
     <ion-buttons end>
       <button ion-button icon-only (click)="presentMorePopoverPage($event)">
@@ -8,34 +8,23 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-card>
-    <ion-card-content>
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <button ion-button icon-only full large tappable color="secondary" (click)="increase()">
-                <ion-icon name="arrow-up"></ion-icon>
+<ion-content padding class="page-home">
+    <ion-grid>
+        <ion-row align-items-center justify-content-center>
+            <button ion-fab (click)="increase()">
+              <ion-icon name='arrow-up'></ion-icon>
             </button>
-          </ion-col>
         </ion-row>
 
-        <ion-row>
-          <ion-col>
-            <h1>{{floor}}</h1>
-          </ion-col>
+        <ion-row align-items-center justify-content-center class="floor">
+            {{floor}}
         </ion-row>
 
-        <ion-row>
-          <ion-col>
-            <button ion-button icon-only full large tappable color="secondary" (click)="decrease()" [disabled]="!isValidFloor()">
-              <ion-icon name="arrow-down"></ion-icon>
+        <ion-row align-items-center justify-content-center>
+            <button ion-fab (click)="decrease()">
+              <ion-icon name='arrow-down'></ion-icon>
             </button>
-          </ion-col>
         </ion-row>
 
       </ion-grid>
-
-    </ion-card-content>
-  </ion-card>
 </ion-content>
