@@ -7,6 +7,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { User, UserInfo } from '@firebase/auth-types';
 
+import { FloorProvider } from '../../providers/floor/floor';
+
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -31,7 +33,8 @@ export class LoginPage {
     private formBuilder: FormBuilder,
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
-    private toastCtrl: ToastController) {
+    private toastCtrl: ToastController,
+    private floorProvider: FloorProvider) {
     
     this.usersCollection = this.afs.collection('users/');
   }
@@ -51,6 +54,7 @@ export class LoginPage {
   ionViewDidLoad() {
     this.afAuth.authState.subscribe(user => {
       if(user) {
+        this.floorProvider.setReferences();
         this.navCtrl.setRoot('TabsPage');
       }
     });
@@ -62,6 +66,7 @@ export class LoginPage {
       if (this.user) {
         console.log(this.user);
         this.navCtrl.setRoot('TabsPage');
+        this.floorProvider.setReferences();
       }
     } catch (e) {
       this.presentToast(e);
@@ -81,6 +86,8 @@ export class LoginPage {
                                     photoURL: this.user.photoURL, 
                                     providerId: this.user.providerId
                                   });
+        this.floorProvider.setReferences();
+        this.floorProvider.updateFloor(1);
         this.navCtrl.setRoot('TabsPage');
       }
     } catch (e) {

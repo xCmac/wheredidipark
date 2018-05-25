@@ -11,16 +11,15 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { FIREBASE_CREDENTIALS } from "./firebase.credentials";
 import { FloorProvider } from '../providers/floor/floor';
-import { DirectivesModule } from '../directives/directives.module';
-
+import { DebounceDirective } from '../directives/debounce/debounce';
 
 @NgModule({
   declarations: [
     MyApp,
+    DebounceDirective
   ],
   imports: [
     BrowserModule,
-    DirectivesModule,
     IonicModule.forRoot(MyApp, {
       scrollPadding: false,
       scrollAssist: true,

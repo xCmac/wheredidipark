@@ -9,9 +9,13 @@ import { Floor } from '../../models/floor';
 @Injectable()
 export class FloorProvider {
   floorsCollection: AngularFirestoreCollection<number>;
-  floor: Observable<Floor[]>;
+  public floor: Observable<Floor[]>;
 
   constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore) {
+
+  }
+
+  public setReferences() {
     this.floorsCollection = this.afs.collection<number>(`floors`);
     this.floor = this.afs.collection('floors', ref => {
       return ref.where('userId', "==", this.afAuth.auth.currentUser.uid);
@@ -33,19 +37,10 @@ export class FloorProvider {
         }
       });
     });
-
-
-    this.floor = this.floorsCollection.snapshotChanges().map(actions => {
-      return actions.map(a => {
-        const data = a.payload.doc.data() as Floor;
-        const id = a.payload.doc.id;
-        return {id, ...data};
-      });
-    });
   }
 
   private async docExists() {
-    return this.afs.doc(`floors/${this.afAuth.auth.currentUser.uid}`).valueChanges().pipe(first()).toPromise()
+    return this.afs.doc(`floors/${this.afAuth.auth.currentUser.email}`).valueChanges().pipe(first()).toPromise()
   }
 
   async updateFloor(level: number) {
@@ -55,14 +50,12 @@ export class FloorProvider {
     console.log(doc);
 
     if(doc) {
-      console.log("Updating doc...");
-      this.afs.doc<Floor>(`floors/${this.afAuth.auth.currentUser.uid}`).update({
+      this.afs.doc<Floor>(`floors/${this.afAuth.auth.currentUser.email}`).update({
         currentFloor: level,
         lastUpdate: Date.now()
       });
     } else {
-      console.log("Creating new doc...");
-      this.afs.doc<Floor>(`floors/${this.afAuth.auth.currentUser.uid}`).set({
+      this.afs.doc<Floor>(`floors/${this.afAuth.auth.currentUser.email}`).set({
         userId: this.afAuth.auth.currentUser.uid,
         currentFloor: level,
         lastUpdate: Date.now()

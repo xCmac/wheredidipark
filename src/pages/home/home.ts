@@ -9,6 +9,7 @@ import { FloorProvider } from '../../providers/floor/floor';
 })
 export class HomePage {
   floor: number = 1;
+  floorO: any;
 
   constructor(public navCtrl: NavController, 
               public popoverCtrl: PopoverController, 
@@ -16,7 +17,8 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-
+    this.floorO = this.floorProvider.floor;
+    console.log(this.floorO);
   }
 
   increase() {
@@ -30,9 +32,7 @@ export class HomePage {
       this.floor = 1
     }
 
-    
     this.floorProvider.updateFloor(this.floor);
-
   }
 
   isValidFloor(): boolean {
@@ -44,7 +44,6 @@ export class HomePage {
     popover.present({
       ev: ev
     });
-
   }
 
 }

@@ -19,9 +19,8 @@
                     full 
                     large 
                     tappable 
-                    color="secondary" 
-                    [debounceTime]="1000" 
-                    (debounceClick)="increase()">
+                    (click)="increase()"
+                    color="secondary">
                 <ion-icon name="arrow-up"></ion-icon>
             </button>
           </ion-col>
@@ -29,7 +28,9 @@
 
         <ion-row>
           <ion-col>
-            <h1>{{floor}}</h1>
+            <h1 *ngFor="let f of floorO | async">
+              {{f?.currentFloor}}
+            </h1>
           </ion-col>
         </ion-row>
 
@@ -41,8 +42,7 @@
                     large 
                     tappable 
                     color="secondary" 
-                    [debounceTime]="1000"
-                    (debounceClick)="decrease()" 
+                    (click)="decrease()"
                     [disabled]="!isValidFloor()">
               <ion-icon name="arrow-down"></ion-icon>
             </button>
