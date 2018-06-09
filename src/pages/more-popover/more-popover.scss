@@ -1,3 +1,9 @@
 page-more-popover {
+    .list-ios, .list-md {
+        margin: 0;
+    }
 
+    .list-ios > .item-block:last-child {
+        border-bottom: none;
+    }
 }
