@@ -18,8 +18,8 @@
             </button>
         </ion-row>
 
-        <ion-row align-items-center justify-content-center class="floor">
-            {{floor}}
+        <ion-row align-items-center justify-content-center class="floor" *ngFor="let f of floorO | async">
+          {{f?.currentFloor}}
         </ion-row>
 
         <ion-row align-items-center justify-content-center>

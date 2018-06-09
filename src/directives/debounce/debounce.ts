@@ -30,4 +30,9 @@ export class DebounceDirective implements OnInit, OnDestroy {
     event.stopPropagation();
     this.clicks.next(event);
   }
+
+  test() {
+    console.log("test");
+  }
+
 }
