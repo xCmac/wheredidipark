@@ -18,7 +18,6 @@ export class LoginPage {
 
   isLogin: boolean = true;
 
-  
   email: string;
   password: string;
 
@@ -37,6 +36,13 @@ export class LoginPage {
     private floorProvider: FloorProvider) {
     
     this.usersCollection = this.afs.collection('users/');
+    this.afAuth.authState.subscribe(user => {
+      if(user) {
+        this.user = user;
+        this.floorProvider.setReferences();
+        this.navCtrl.setRoot('HomePage');
+      }
+    });
   }
 
   ngOnInit() {
@@ -52,20 +58,16 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
-    this.afAuth.authState.subscribe(user => {
-      if(user) {
-        this.floorProvider.setReferences();
-        this.navCtrl.setRoot('TabsPage');
-      }
-    });
+    if(this.user) {
+      this.navCtrl.setRoot('HomePage');
+    }
   }
 
   async login() {
     try {
       this.user = await this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password);
       if (this.user) {
-        console.log(this.user);
-        this.navCtrl.setRoot('TabsPage');
+        this.navCtrl.setRoot('HomePage');
         this.floorProvider.setReferences();
       }
     } catch (e) {
@@ -87,8 +89,8 @@ export class LoginPage {
                                     providerId: this.user.providerId
                                   });
         this.floorProvider.setReferences();
-        this.floorProvider.updateFloor(1);
-        this.navCtrl.setRoot('TabsPage');
+        // this.floorProvider.updateFloor(1);
+        this.navCtrl.setRoot('HomePage');
       }
     } catch (e) {
       this.presentToast(e);

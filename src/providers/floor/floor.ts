@@ -2,23 +2,19 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
-import { first } from 'rxjs/operators';
-import { Floor } from '../../models/floor';
-
+import { Car } from '../../models/car';
 
 @Injectable()
 export class FloorProvider {
-  floorsCollection: AngularFirestoreCollection<number>;
-  public floor: Observable<Floor[]>;
+  carsCollection: AngularFirestoreCollection<Car>;
+  public cars: Observable<Car[]>;
 
-  constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore) {
-
-  }
+  constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore) {}
 
   public setReferences() {
-    this.floorsCollection = this.afs.collection<number>(`floors`);
-    this.floor = this.afs.collection('floors', ref => {
-      return ref.where('userId', "==", this.afAuth.auth.currentUser.uid);
+    this.carsCollection = this.afs.collection<Car>(`cars`);
+    this.cars = this.afs.collection('cars', ref => {
+      return ref.where('ownerId', "==", this.afAuth.auth.currentUser.uid);
     }).snapshotChanges().map(changes => {
       return changes.map(action => {
         if(action.type === "modified") {
@@ -30,35 +26,28 @@ export class FloorProvider {
         }
 
         return {
-          id: action.payload.doc.id,
-          userId: action.payload.doc.get('userId'),
+          documentId: action.payload.doc.id,
+          ownerId: action.payload.doc.get('ownerId'),
           currentFloor: action.payload.doc.get('currentFloor'),
-          lastUpdate: action.payload.doc.get('lastUpdate')
+          lastUpdate: action.payload.doc.get('lastUpdate'),
+          name: action.payload.doc.get('name')
         }
       });
     });
   }
 
-  private async docExists() {
-    return this.afs.doc(`floors/${this.afAuth.auth.currentUser.email}`).valueChanges().pipe(first()).toPromise()
-  }
+  async updateCar(car: Car) {
+    if (!car) return;
 
-  async updateFloor(level: number) {
-    if (!level) return;
+    car.lastUpdate = Date.now();
 
-    const doc = await this.docExists()
-    console.log(doc);
-
-    if(doc) {
-      this.afs.doc<Floor>(`floors/${this.afAuth.auth.currentUser.email}`).update({
-        currentFloor: level,
-        lastUpdate: Date.now()
-      });
+    if(!car.documentId) {
+      await this.carsCollection.add(car);
+      console.log("adding");
     } else {
-      this.afs.doc<Floor>(`floors/${this.afAuth.auth.currentUser.email}`).set({
-        userId: this.afAuth.auth.currentUser.uid,
-        currentFloor: level,
-        lastUpdate: Date.now()
+      console.log("updating");
+      await this.afs.doc<Car>(`cars/${car.documentId}`).update({
+        currentFloor: car.currentFloor
       });
     }
   }

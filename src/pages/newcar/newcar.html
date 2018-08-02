@@ -1,0 +1,36 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Add New Car</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="newCarForm" novalidate>
+    <ion-list inset>
+      <ion-item>
+        <ion-label>Car Name</ion-label>
+        <ion-input formControlName="carName" [(ngModel)]="carName" type="text"></ion-input>
+      </ion-item>
+  
+      <p class="error-message" *ngIf="!newCarForm.controls.carName.valid && newCarForm.controls.carName.dirty">
+        Enter a valid car name
+      </p>
+    
+      <ion-item>
+        <ion-label>Floor</ion-label>
+        <ion-input formControlName="currentFloor" [(ngModel)]="currentFloor" type="number"></ion-input>
+      </ion-item>
+  
+      <p class="error-message" *ngIf="!newCarForm.controls.currentFloor.valid && newCarForm.controls.currentFloor.dirty">
+        Enter a valid floor
+      </p>
+    </ion-list>
+  </form>
+
+  <div padding>
+    <button ion-button color="secondary" block [disabled]="!isNewCarFormValid()" (click)="addCar()">Add</button>
+  </div>
+</ion-content>

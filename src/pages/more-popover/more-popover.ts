@@ -17,16 +17,11 @@ export class MorePopoverPage {
               private app: App) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MorePopoverPage');
-  }
-
   logout() {
     this.afAuth.auth.signOut()
     .then(() => {
       this.viewCtrl.dismiss();
       this.app.getActiveNavs()[0].setRoot('LoginPage');
-      
     })
     .catch(e => {
       console.log("Error Signing out: ", e)

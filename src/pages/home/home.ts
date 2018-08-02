@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, IonicPage, PopoverController } from 'ionic-angular';
 import { FloorProvider } from '../../providers/floor/floor';
+import { ModalController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -12,31 +13,13 @@ export class HomePage {
   floorO: any;
 
   constructor(public navCtrl: NavController, 
-              public popoverCtrl: PopoverController, 
+              public popoverCtrl: PopoverController,
+              public modalCtrl: ModalController, 
               private floorProvider: FloorProvider) {
   }
 
   ionViewDidLoad() {
-    this.floorO = this.floorProvider.floor;
-    console.log(this.floorO);
-  }
-
-  increase() {
-    this.floor += 1;
-    this.floorProvider.updateFloor(this.floor);
-  }
-
-  decrease() {
-    this.floor -= 1;
-    if(this.floor < 1) {
-      this.floor = 1
-    }
-
-    this.floorProvider.updateFloor(this.floor);
-  }
-
-  isValidFloor(): boolean {
-    return this.floor > 1;
+    this.print();
   }
 
   presentMorePopoverPage(ev: UIEvent) {
@@ -44,6 +27,18 @@ export class HomePage {
     popover.present({
       ev: ev
     });
+  }
+
+  print() {
+    this.floorProvider.cars.subscribe(res => {
+      console.log(res);
+    })
+
+  }
+
+  addNewCar() {
+    const modal = this.modalCtrl.create('NewcarPage');
+    modal.present();
   }
 
 }
