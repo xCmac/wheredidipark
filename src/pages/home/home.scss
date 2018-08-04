@@ -14,7 +14,6 @@
     // }
 
     button {
-        background-color: color($colors, text);
         color: color($colors, dark);
     }
 
@@ -24,10 +23,5 @@
 
     ion-icon {
         font-size: 4rem;
-    }
-
-    .floor {
-        font-size: 25rem;
-        flex-grow: 1;
     }
 }

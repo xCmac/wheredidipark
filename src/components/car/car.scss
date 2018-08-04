@@ -1,3 +1,29 @@
 car {
+    .floor {
+        flex-grow: 1;
+    }
 
+    .card-content-md {
+        line-height: 85%;
+        font-size: 13rem;
+    }
+
+    .card-md {
+        background: white;
+        color: #233d4d;
+    }
+
+    button {
+        background-color: #dddddd;
+        margin: 2px;
+        border-radius: 5px;
+    }
+
+    .arrows {
+        font-size: 10rem !important;
+    }
+
+    ion-icon {
+        padding: 0.1em 0 !important;
+    }
 }
