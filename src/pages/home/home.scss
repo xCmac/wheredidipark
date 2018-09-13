@@ -1,5 +1,5 @@
 .page-home {
-    color: white;
+    color: color($colors, text);
 
     // .scroll-content {
     //     display: table !important;
@@ -14,7 +14,8 @@
     // }
 
     button {
-        color: color($colors, dark);
+        background-color: color($colors, primary);
+        color: color($colors, light);
     }
 
     ion-grid {
