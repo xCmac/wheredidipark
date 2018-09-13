@@ -18,22 +18,11 @@ export class HomePage {
               private floorProvider: FloorProvider) {
   }
 
-  ionViewDidLoad() {
-    this.print();
-  }
-
   presentMorePopoverPage(ev: UIEvent) {
     let popover = this.popoverCtrl.create('MorePopoverPage');
     popover.present({
       ev: ev
     });
-  }
-
-  print() {
-    this.floorProvider.cars.subscribe(res => {
-      console.log(res);
-    })
-
   }
 
   addNewCar() {

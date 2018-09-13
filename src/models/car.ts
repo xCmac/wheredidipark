@@ -3,5 +3,6 @@ export interface Car {
     name?: string,
     documentId?: string
     currentFloor?: number;
+    color?: string;
     lastUpdate?: number;
 }

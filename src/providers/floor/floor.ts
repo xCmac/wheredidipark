@@ -30,6 +30,7 @@ export class FloorProvider {
           ownerId: action.payload.doc.get('ownerId'),
           currentFloor: action.payload.doc.get('currentFloor'),
           lastUpdate: action.payload.doc.get('lastUpdate'),
+          color: action.payload.doc.get('color'),
           name: action.payload.doc.get('name')
         }
       });
@@ -43,12 +44,8 @@ export class FloorProvider {
 
     if(!car.documentId) {
       await this.carsCollection.add(car);
-      console.log("adding");
     } else {
-      console.log("updating");
-      await this.afs.doc<Car>(`cars/${car.documentId}`).update({
-        currentFloor: car.currentFloor
-      });
+      await this.afs.doc<Car>(`cars/${car.documentId}`).set(car);
     }
   }
 
