@@ -2,10 +2,27 @@ car {
     .floor {
         flex-grow: 1;
     }
+    
+    .car-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .car-name {
+        font-size: 1.5rem;
+        margin-bottom: 1.3rem;
+    }
+    
+    .last-update {
+        
+    }
 
     .card-content-md {
         line-height: 85%;
-        font-size: 13rem;
+        font-size: 7rem;
+        display: flex;
+        justify-content: center
     }
 
     .card-md {

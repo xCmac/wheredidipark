@@ -1,5 +1,20 @@
 <ion-card>
   <ion-row>
+    <ion-col col-4 align-items-center justify-content-center class="floor">
+      <ion-card-content>
+        {{theCar.currentFloor}}
+      </ion-card-content>
+    </ion-col>
+    <ion-col class="car-info">
+      <div class="car-name">
+        {{theCar.name}}
+      </div>
+      <div>
+        {{theCar.lastUpdate | date:'shortDate'}}
+      </div>
+    </ion-col>
+  </ion-row>
+  <!-- <ion-row>
     <ion-col>
       <ion-row align-items-center justify-content-center>
         {{theCar.name}}
@@ -24,28 +39,6 @@
             <ion-icon name="arrow-down" class="arrows"></ion-icon>
         </button>
       </ion-row>
-    </ion-col>
-  </ion-row>
-  <!-- <ion-item>
-    {{theCar.name}}
-  </ion-item>
-  <ion-item>
-    Last Update: {{theCar.lastUpdate}}
-  </ion-item>
-  <ion-card-content>
-    {{theCar.currentFloor}}
-  </ion-card-content>
-  <ion-row>
-    <ion-col>
-      <button ion-button icon-only block (click)="increase()">
-          <ion-icon name="arrow-up"></ion-icon>
-      </button>
-    </ion-col>
-
-    <ion-col>
-      <button ion-button icon-only block (click)="decrease()">
-          <ion-icon name="arrow-down"></ion-icon>
-      </button>
     </ion-col>
   </ion-row> -->
 </ion-card>
