@@ -9,9 +9,11 @@ import { FloorProvider } from '../../providers/floor/floor';
 export class CarComponent {
   
   theCar: Car;
+  carColor: string;
 
   @Input('car') set car(car: Car) {
     this.theCar = car;
+    this.carColor = this.getCarColor();
   }
 
   constructor(private floorProvider: FloorProvider) {
@@ -25,6 +27,18 @@ export class CarComponent {
   decrease() {
     this.theCar.currentFloor--;
     this.floorProvider.updateCar(this.theCar);
+  }
+
+  getCarColor() {
+    if (!this.theCar.color) {
+      return "#FFFFFF";
+    } 
+
+    switch(this.theCar.color) {
+      case "red": {
+        return "#F69876";
+      }
+    }
   }
 
 }
