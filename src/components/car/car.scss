@@ -14,6 +14,17 @@ car {
         margin-bottom: 1.3rem;
     }
 
+    .color-buttons {
+        border: white solid 2px;
+        height: 20px;
+        width: 20px;
+        border-radius: 10px;
+    }
+    
+    .no-bottom-padding {
+        padding: 13px 16px 0 16px;
+    }
+
     .card-content-md {
         line-height: 85%;
         font-size: 7rem;
@@ -22,8 +33,7 @@ car {
     }
 
     .card-md {
-        background: white;
-        color: #233d4d;
+        color: color($colors, light);
     }
 
     button {
@@ -33,7 +43,7 @@ car {
     }
 
     .arrows {
-        font-size: 10rem !important;
+        font-size: 5rem !important;
     }
 
     ion-icon {

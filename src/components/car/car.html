@@ -1,4 +1,4 @@
-<ion-card [style.backgroundColor]="carColor">
+<ion-card [style.backgroundColor]="carColor" *ngIf="!isOpen" (click)="toggleIsOpen()">
   <ion-row>
     <ion-col col-4 align-items-center justify-content-center class="floor">
       <ion-card-content>
@@ -14,31 +14,38 @@
       </div>
     </ion-col>
   </ion-row>
-  <!-- <ion-row>
+</ion-card>
+<ion-card [style.backgroundColor]="carColor" (click)="toggleIsOpen()" *ngIf="isOpen">
+  <ion-row>
     <ion-col>
-      <ion-row align-items-center justify-content-center>
-        {{theCar.name}}
-      </ion-row>
       <ion-row align-items-center justify-content-center class="floor">
-        <ion-card-content>
+        <ion-card-content class="no-bottom-padding">
           {{theCar.currentFloor}}
         </ion-card-content>
       </ion-row>
+      <ion-row justify-content-center>
+          <button class="color-buttons" [style.backgroundColor]="colors.red"></button>
+          <button class="color-buttons" [style.backgroundColor]="colors.orange"></button>
+          <button class="color-buttons" [style.backgroundColor]="colors.yellow"></button>
+          <button class="color-buttons" [style.backgroundColor]="colors.blue"></button>
+          <button class="color-buttons" [style.backgroundColor]="colors.green"></button>
+          <button class="color-buttons" [style.backgroundColor]="colors.darkGrey"></button>
+      </ion-row>
       <ion-row align-items-center justify-content-center>
-        Last Update: {{theCar.lastUpdate | date:'shortDate'}}
+          {{theCar.name}}
       </ion-row>
     </ion-col>
     <ion-col col-4>
-      <ion-row align-self-stretch>
-        <button icon-only (click)="increase()">
+      <ion-row align-items-center justify-content-center align-self-stretch>
+        <button icon-only (click)="increase()" [style.backgroundColor]="carColor">
             <ion-icon name="arrow-up" class="arrows"></ion-icon>
         </button>
       </ion-row>
-      <ion-row align-self-stretch>
-        <button icon-only (click)="decrease()">
+      <ion-row align-items-center justify-content-center align-self-stretch>
+        <button icon-only (click)="decrease()" [style.backgroundColor]="carColor">
             <ion-icon name="arrow-down" class="arrows"></ion-icon>
         </button>
       </ion-row>
     </ion-col>
-  </ion-row> -->
+  </ion-row>
 </ion-card>

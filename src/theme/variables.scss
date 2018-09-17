@@ -22,8 +22,8 @@ $app-direction: ltr;
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
 $text-color: #333333;
-$background-color: #ffffff;
-$toolbar-background: #ffffff;
+$background-color: #F9FAFB;
+$toolbar-background: #F9FAFB;
 
 
 // Named Color Variables
@@ -35,12 +35,17 @@ $toolbar-background: #ffffff;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #7a9acf,
+  primary:    #4464AD,
+  secondary: #F9FAFB,
   text:  #333333,
-  secondary:   #444444,
-  light:      #ffffff,
-  dark:       #03c383,
-  button: #ffffff
+  button: #F9FAFB,
+  light: #F9FAFB,
+  white: #F9FAFB,
+  red: #C33C54,
+  orange: #FF8A5B, 
+  yellow: #F3CA40,
+  green: #3FCF8F,
+  blue: #4464AD
 );
 
 
