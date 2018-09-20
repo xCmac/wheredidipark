@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Car } from '../../models/car';
 import { FloorProvider } from '../../providers/floor/floor';
 import { COLORS } from '../../theme/colors';
@@ -10,13 +10,22 @@ import { COLORS } from '../../theme/colors';
 export class CarComponent {
   theCar: Car;
   carColor: string;
-  isOpen: boolean;
   colors = COLORS;
+  isOpenValue: boolean;
 
   @Input('car') set car(car: Car) {
     this.theCar = car;
     this.carColor = this.getCarColor();
-    this.isOpen = false;
+  }
+
+  @Input() get isOpen() {
+    return this.isOpenValue;
+  }
+
+  @Output() isOpenChange = new EventEmitter();
+  set isOpen(value) {
+    this.isOpenValue = value;
+    this.isOpenChange.emit(this.isOpenValue);
   }
 
   constructor(private floorProvider: FloorProvider) {
@@ -54,6 +63,36 @@ export class CarComponent {
         return this.colors.blue;
       }
     }
+  }
+
+  setCarColor(hexColor: string) {
+    var englishColor = "";
+
+    switch(hexColor) {
+      case this.colors.red: {
+        englishColor = "red";
+        break;
+      }
+      case this.colors.orange: {
+        englishColor = "orange";
+        break;
+      }
+      case this.colors.yellow: {
+        englishColor = "yellow";
+        break;
+      }
+      case this.colors.green: {
+        englishColor = "green";
+        break;
+      }
+      case this.colors.blue: {
+        englishColor = "blue";
+        break;
+      }
+    }
+
+    this.theCar.color = englishColor;
+    this.floorProvider.updateCar(this.theCar);
   }
 
   toggleIsOpen() {
