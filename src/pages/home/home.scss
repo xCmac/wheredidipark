@@ -9,4 +9,17 @@
     ion-icon {
         font-size: 4rem;
     }
+
+    ion-card.add-card {
+        position: relative;
+        text-align: center;
+        border-radius: 18px;
+        background-color: color($colors, lightgrey);
+        .card-content {
+            line-height: 85%;
+            font-size: 7rem;
+            display: flex;
+            justify-content: center
+        }
+    }
 }

@@ -11,8 +11,11 @@
 <ion-content padding class="page-home">
   <car *ngFor="let car of floorProvider.cars | async; let i = index" [car]="car" [(isOpen)]="isOpenArray[i]">
   </car>
-  
-  <ion-fab right bottom>
-      <button ion-fab mini (click)="addNewCar()"><ion-icon name="add"></ion-icon></button>
-  </ion-fab>
+
+  <ion-card (click)="addNewCar()" class="add-card">
+      <ion-card-content>
+          <ion-icon name="add" color="white"></ion-icon>
+      </ion-card-content>
+  </ion-card>
+
 </ion-content>
