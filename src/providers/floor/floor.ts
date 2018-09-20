@@ -49,4 +49,10 @@ export class FloorProvider {
     }
   }
 
+  async deleteCar(car: Car) {
+    if(!car) return;
+
+    await this.afs.doc<Car>(`cars/${car.documentId}`).ref.delete();
+  }
+
 }
