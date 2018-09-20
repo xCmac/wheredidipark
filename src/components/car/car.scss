@@ -1,4 +1,8 @@
 car {
+    .close {
+        font-size: 1.5rem !important;
+    }
+
     .floor {
         flex-grow: 1;
     }
@@ -34,6 +38,7 @@ car {
 
     .card-md {
         color: color($colors, light);
+        border-radius: 18px;
     }
 
     button {
