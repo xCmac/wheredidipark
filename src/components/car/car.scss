@@ -1,6 +1,7 @@
 car {
     .close {
         font-size: 1.5rem !important;
+        padding: 0.5rem !important;
     }
 
     .floor {
@@ -20,23 +21,20 @@ car {
 
     .color-buttons {
         border: white solid 2px;
-        height: 20px;
-        width: 20px;
-        border-radius: 10px;
-    }
-    
-    .no-bottom-padding {
-        padding: 13px 16px 0 16px;
+        height: 25px;
+        width: 25px;
+        border-radius: 15px;
     }
 
-    .card-content-md {
+    .card-content {
         line-height: 85%;
         font-size: 7rem;
         display: flex;
-        justify-content: center
+        justify-content: center;
+        padding: 10px 16px;
     }
 
-    .card-md {
+    .card {
         color: color($colors, light);
         border-radius: 18px;
     }
