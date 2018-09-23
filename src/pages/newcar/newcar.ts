@@ -42,6 +42,10 @@ export class NewcarPage {
     });
   }
 
+  cancel() {
+    this.viewCtrl.dismiss();
+  }
+
   isNewCarFormValid(): boolean {
     return this.newCarForm.valid;
   }

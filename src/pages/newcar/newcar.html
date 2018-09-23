@@ -31,6 +31,14 @@
   </form>
 
   <div padding>
-    <button ion-button color="secondary" block [disabled]="!isNewCarFormValid()" (click)="addCar()">Add</button>
+    <ion-row>
+      <ion-col col-8>
+          <button ion-button color="primary" block [disabled]="!isNewCarFormValid()" (click)="addCar()">Add</button>
+      </ion-col>
+
+      <ion-col col-4>
+          <button ion-button color="lightgrey" block (click)="cancel()">Cancel</button>
+      </ion-col>
+    </ion-row>
   </div>
 </ion-content>
