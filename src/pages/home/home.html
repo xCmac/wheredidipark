@@ -14,10 +14,11 @@
     [isOpen]="false">
   </car>
 
-  <ion-card (click)="addNewCar()" class="add-card">
-      <ion-card-content>
-          <ion-icon name="add" color="white"></ion-icon>
-      </ion-card-content>
-  </ion-card>
-
+  <ion-footer no-border>
+    <ion-card (click)="addNewCar()" class="add-card">
+        <ion-card-content>
+            <ion-icon name="add" color="white"></ion-icon>
+        </ion-card-content>
+    </ion-card>
+  </ion-footer>
 </ion-content>
