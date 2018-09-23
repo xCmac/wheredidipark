@@ -11,22 +11,15 @@ export class CarComponent {
   theCar: Car;
   carColor: string;
   colors = COLORS;
-  isOpenValue: boolean;
+  // isOpen: boolean = false;
 
   @Input('car') set car(car: Car) {
     this.theCar = car;
     this.carColor = this.getCarColor();
   }
 
-  @Input() get isOpen() {
-    return this.isOpenValue;
-  }
-
-  @Output() isOpenChange = new EventEmitter();
-  set isOpen(value) {
-    this.isOpenValue = value;
-    this.isOpenChange.emit(this.isOpenValue);
-  }
+  @Input() isOpen: boolean; 
+  // @Output() isOpenChange = new EventEmitter();
 
   constructor(private floorProvider: FloorProvider) {
   }
@@ -101,6 +94,7 @@ export class CarComponent {
 
   toggleIsOpen() {
     this.isOpen = !this.isOpen;
+    // this.isOpenChange.emit(this.isOpen);
   }
 
 }

@@ -37,7 +37,7 @@ export class FloorProvider {
     });
   }
 
-  async updateCar(car: Car) {
+  public async updateCar(car: Car) {
     if (!car) return;
 
     car.lastUpdate = Date.now();
@@ -49,7 +49,7 @@ export class FloorProvider {
     }
   }
 
-  async deleteCar(car: Car) {
+  public async deleteCar(car: Car) {
     if(!car) return;
 
     await this.afs.doc<Car>(`cars/${car.documentId}`).delete();

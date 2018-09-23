@@ -20,6 +20,7 @@ export class HomePage {
               public modalCtrl: ModalController, 
               private floorProvider: FloorProvider) {
     floorProvider.cars.subscribe(data => {
+      this.cars = data;
       if(this.isOpenArray.length == 0 || this.isOpenArray.length != data.length) {
         this.isOpenArray = [];
         data.forEach(car => {
@@ -39,5 +40,13 @@ export class HomePage {
   addNewCar() {
     const modal = this.modalCtrl.create('NewcarPage');
     modal.present();
+  }
+
+  isOpenChange(event, index) {
+    this.isOpenArray[index] = event;
+  }
+
+  test(index, car) {
+    console.log(index, car);
   }
 }
