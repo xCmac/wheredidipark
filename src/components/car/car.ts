@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Car } from '../../models/car';
 import { FloorProvider } from '../../providers/floor/floor';
 import { COLORS } from '../../theme/colors';
@@ -18,8 +18,7 @@ export class CarComponent {
     this.carColor = this.getCarColor();
   }
 
-  @Input() isOpen: boolean; 
-  // @Output() isOpenChange = new EventEmitter();
+  @Input() isOpen: boolean;
 
   constructor(private floorProvider: FloorProvider) {
   }
