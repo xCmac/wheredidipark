@@ -20,9 +20,8 @@ export class HomePage {
               public modalCtrl: ModalController, 
               private floorProvider: FloorProvider) {
     floorProvider.cars.subscribe(data => {
-      this.cars = data;
-
-      if(this.isOpenArray.length == 0) {
+      if(this.isOpenArray.length == 0 || this.isOpenArray.length != data.length) {
+        this.isOpenArray = [];
         data.forEach(car => {
           this.isOpenArray.push(false);
         });

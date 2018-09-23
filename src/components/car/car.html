@@ -1,4 +1,4 @@
-<ion-card [style.backgroundColor]="carColor" *ngIf="!isOpen" (click)="toggleIsOpen()">
+<ion-card [style.backgroundColor]="carColor" *ngIf="!isOpen" (click)="toggleIsOpen()" (press)="deleteCar()">
   <ion-row>
     <ion-col col-4 align-items-center justify-content-center class="floor">
       <ion-card-content>
@@ -7,7 +7,7 @@
     </ion-col>
     <ion-col class="car-info">
       <div class="car-name">
-        {{theCar.name}}
+        {{theCar.name.toUpperCase()}}
       </div>
       <div>
         {{theCar.lastUpdate | date:'shortDate'}}
@@ -36,8 +36,8 @@
           <button class="color-buttons" [style.backgroundColor]="colors.blue" (click)="setCarColor(colors.blue)"></button>
           <button class="color-buttons" [style.backgroundColor]="colors.green" (click)="setCarColor(colors.green)"></button>
       </ion-row>
-      <ion-row align-items-center justify-content-center>
-          {{theCar.name}}
+      <ion-row align-items-center justify-content-center class="edit-car-name">
+          {{theCar.name.toUpperCase()}}
       </ion-row>
     </ion-col>
     <ion-col col-4>

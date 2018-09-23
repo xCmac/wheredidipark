@@ -9,7 +9,9 @@
 </ion-header>
 
 <ion-content padding class="page-home">
-  <car *ngFor="let car of floorProvider.cars | async; let i = index" [car]="car" [(isOpen)]="isOpenArray[i]">
+  <car *ngFor="let car of floorProvider.cars | async; let i = index" 
+    [car]="car" 
+    [(isOpen)]="isOpenArray[i]">
   </car>
 
   <ion-card (click)="addNewCar()" class="add-card">

@@ -19,6 +19,10 @@ car {
         margin-bottom: 1.3rem;
     }
 
+    .edit-car-name {
+        line-height: 1.5;
+    }
+
     .color-buttons {
         border: white solid 2px;
         height: 25px;
@@ -52,5 +56,10 @@ car {
 
     ion-icon {
         padding: 0.1em 0 !important;
+    }
+
+    input  {
+        text-align: center;
+        padding: 0 !important;
     }
 }

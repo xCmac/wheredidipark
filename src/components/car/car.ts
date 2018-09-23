@@ -95,6 +95,10 @@ export class CarComponent {
     this.floorProvider.updateCar(this.theCar);
   }
 
+  deleteCar() {
+    this.floorProvider.deleteCar(this.theCar);
+  }
+
   toggleIsOpen() {
     this.isOpen = !this.isOpen;
   }
