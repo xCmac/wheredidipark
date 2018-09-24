@@ -3,7 +3,7 @@ import { IonicPage, NavController, ViewController, NavParams } from 'ionic-angul
 import { AngularFireAuth } from 'angularfire2/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Car } from '../../models/car';
-import { FloorProvider } from '../../providers/floor/floor';
+import { CarProvider } from '../../providers/car/car';
 
 @IonicPage()
 @Component({
@@ -20,7 +20,7 @@ export class NewcarPage {
               public navParams: NavParams, 
               private afAuth: AngularFireAuth,
               private formBuilder: FormBuilder, 
-              private floorProvider: FloorProvider) {
+              private carProvider: CarProvider) {
   }
 
   ngOnInit() {
@@ -37,7 +37,7 @@ export class NewcarPage {
       ownerId: this.afAuth.auth.currentUser.uid
     };
 
-    this.floorProvider.updateCar(newCar).then(() => {
+    this.carProvider.updateCar(newCar).then(() => {
       this.viewCtrl.dismiss();
     });
   }

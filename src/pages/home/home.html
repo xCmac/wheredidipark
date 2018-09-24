@@ -11,7 +11,8 @@
 <ion-content padding class="page-home">
   <car *ngFor="let car of cars; let i = index" 
     [car]="car" 
-    [isOpen]="false">
+    [isOpen]="isOpenArray[i]"
+    (isOpenChange)="isOpenChange($event, i)">
   </car>
 
   <ion-footer no-border>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, IonicPage, PopoverController } from 'ionic-angular';
-import { FloorProvider } from '../../providers/floor/floor';
+import { CarProvider } from '../../providers/car/car';
 import { ModalController } from 'ionic-angular';
 import { Car } from '../../models/car';
 
@@ -18,8 +18,8 @@ export class HomePage {
   constructor(public navCtrl: NavController, 
               public popoverCtrl: PopoverController,
               public modalCtrl: ModalController, 
-              private floorProvider: FloorProvider) {
-    floorProvider.cars.subscribe(data => {
+              private carProvider: CarProvider) {
+    carProvider.cars.subscribe(data => {
       this.cars = data;
       if(this.isOpenArray.length == 0 || this.isOpenArray.length != data.length) {
         this.isOpenArray = [];
@@ -44,9 +44,5 @@ export class HomePage {
 
   isOpenChange(event, index) {
     this.isOpenArray[index] = event;
-  }
-
-  test(index, car) {
-    console.log(index, car);
   }
 }

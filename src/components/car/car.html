@@ -1,4 +1,4 @@
-<ion-card [style.backgroundColor]="carColor" *ngIf="!isOpen" (click)="toggleIsOpen()" (press)="deleteCar()">
+<ion-card [style.backgroundColor]="carColor" *ngIf="!isOpen" (click)="toggleIsOpen()" (press)="confirmDeleteCar()">
   <ion-row>
     <ion-col col-4 align-items-center justify-content-center class="floor">
       <ion-card-content>
@@ -26,7 +26,6 @@
           <div>
               {{theCar.currentFloor}}
           </div>
-          
         </ion-card-content>
       </ion-row>
       <ion-row justify-content-center>

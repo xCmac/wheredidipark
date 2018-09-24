@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { AlertController } from 'ionic-angular';
 import { Car } from '../../models/car';
-import { FloorProvider } from '../../providers/floor/floor';
+import { CarProvider } from '../../providers/car/car';
 import { COLORS } from '../../theme/colors';
 
 @Component({
@@ -11,7 +12,6 @@ export class CarComponent {
   theCar: Car;
   carColor: string;
   colors = COLORS;
-  // isOpen: boolean = false;
 
   @Input('car') set car(car: Car) {
     this.theCar = car;
@@ -19,18 +19,19 @@ export class CarComponent {
   }
 
   @Input() isOpen: boolean;
+  @Output() isOpenChange: EventEmitter<boolean> = new EventEmitter();
 
-  constructor(private floorProvider: FloorProvider) {
+  constructor(private carProvider: CarProvider, public alertCtrl: AlertController) {
   }
 
   increase() {
     this.theCar.currentFloor++;
-    this.floorProvider.updateCar(this.theCar);
+    this.carProvider.updateCar(this.theCar);
   }
 
   decrease() {
     this.theCar.currentFloor--;
-    this.floorProvider.updateCar(this.theCar);
+    this.carProvider.updateCar(this.theCar);
   }
 
   getCarColor() {
@@ -84,16 +85,38 @@ export class CarComponent {
     }
 
     this.theCar.color = englishColor;
-    this.floorProvider.updateCar(this.theCar);
+    this.carProvider.updateCar(this.theCar);
   }
 
   deleteCar() {
-    this.floorProvider.deleteCar(this.theCar);
+    this.carProvider.deleteCar(this.theCar);
+  }
+
+  confirmDeleteCar() {
+    const confirm = this.alertCtrl.create({
+      title: 'Delete this car?',
+      message: 'Do you agree to delete this car? You will lose the data you\'ve saved for it.',
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            this.deleteCar();
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
   toggleIsOpen() {
     this.isOpen = !this.isOpen;
-    // this.isOpenChange.emit(this.isOpen);
+    this.isOpenChange.emit(this.isOpen);
   }
 
 }

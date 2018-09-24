@@ -10,7 +10,6 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { FIREBASE_CREDENTIALS } from "./firebase.credentials";
-import { FloorProvider } from '../providers/floor/floor';
 import { CarProvider } from '../providers/car/car';
 
 @NgModule({
@@ -39,7 +38,6 @@ import { CarProvider } from '../providers/car/car';
     SplashScreen,
     AngularFireAuthModule,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    FloorProvider,
     CarProvider
   ]
 })

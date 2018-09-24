@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { User, UserInfo } from '@firebase/auth-types';
 
-import { FloorProvider } from '../../providers/floor/floor';
+import { CarProvider } from '../../providers/car/car';
 
 @IonicPage()
 @Component({
@@ -33,13 +33,13 @@ export class LoginPage {
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private toastCtrl: ToastController,
-    private floorProvider: FloorProvider) {
+    private carProvider: CarProvider) {
     
     this.usersCollection = this.afs.collection('users/');
     this.afAuth.authState.subscribe(user => {
       if(user) {
         this.user = user;
-        this.floorProvider.setReferences();
+        this.carProvider.setReferences();
         this.navCtrl.setRoot('HomePage');
       }
     });
@@ -68,7 +68,7 @@ export class LoginPage {
       this.user = await this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password);
       if (this.user) {
         this.navCtrl.setRoot('HomePage');
-        this.floorProvider.setReferences();
+        this.carProvider.setReferences();
       }
     } catch (e) {
       this.presentToast(e);
@@ -88,8 +88,7 @@ export class LoginPage {
                                     photoURL: this.user.photoURL, 
                                     providerId: this.user.providerId
                                   });
-        this.floorProvider.setReferences();
-        // this.floorProvider.updateFloor(1);
+        this.carProvider.setReferences();
         this.navCtrl.setRoot('HomePage');
       }
     } catch (e) {
