@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, IonicPage, PopoverController } from 'ionic-angular';
-import { FloorProvider } from '../../providers/floor/floor';
+import { CarProvider } from '../../providers/car/car';
+import { ModalController } from 'ionic-angular';
+import { Car } from '../../models/car';
 
 @IonicPage()
 @Component({
@@ -10,33 +12,22 @@ import { FloorProvider } from '../../providers/floor/floor';
 export class HomePage {
   floor: number = 1;
   floorO: any;
+  cars: Car[];
+  isOpenArray: boolean[] = [];
 
   constructor(public navCtrl: NavController, 
-              public popoverCtrl: PopoverController, 
-              private floorProvider: FloorProvider) {
-  }
-
-  ionViewDidLoad() {
-    this.floorO = this.floorProvider.floor;
-    console.log(this.floorO);
-  }
-
-  increase() {
-    this.floor += 1;
-    this.floorProvider.updateFloor(this.floor);
-  }
-
-  decrease() {
-    this.floor -= 1;
-    if(this.floor < 1) {
-      this.floor = 1
-    }
-
-    this.floorProvider.updateFloor(this.floor);
-  }
-
-  isValidFloor(): boolean {
-    return this.floor > 1;
+              public popoverCtrl: PopoverController,
+              public modalCtrl: ModalController, 
+              private carProvider: CarProvider) {
+    carProvider.cars.subscribe(data => {
+      this.cars = data;
+      if(this.isOpenArray.length == 0 || this.isOpenArray.length != data.length) {
+        this.isOpenArray = [];
+        data.forEach(car => {
+          this.isOpenArray.push(false);
+        });
+      }
+    });
   }
 
   presentMorePopoverPage(ev: UIEvent) {
@@ -46,4 +37,12 @@ export class HomePage {
     });
   }
 
+  addNewCar() {
+    const modal = this.modalCtrl.create('NewcarPage');
+    modal.present();
+  }
+
+  isOpenChange(event, index) {
+    this.isOpenArray[index] = event;
+  }
 }

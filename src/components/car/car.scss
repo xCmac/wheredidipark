@@ -1,0 +1,65 @@
+car {
+    .close {
+        font-size: 1.5rem !important;
+        padding: 0.5rem !important;
+    }
+
+    .floor {
+        flex-grow: 1;
+    }
+    
+    .car-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .car-name {
+        font-size: 1.5rem;
+        margin-bottom: 1.3rem;
+    }
+
+    .edit-car-name {
+        line-height: 1.5;
+    }
+
+    .color-buttons {
+        border: white solid 2px;
+        height: 25px;
+        width: 25px;
+        border-radius: 15px;
+    }
+
+    .card-content {
+        line-height: 85%;
+        font-size: 7rem;
+        display: flex;
+        justify-content: center;
+        padding: 10px 16px;
+    }
+
+    .card {
+        color: color($colors, light);
+        border-radius: 18px;
+    }
+
+    button {
+        background-color: #dddddd;
+        margin: 2px;
+        border-radius: 5px;
+        padding: 0;
+    }
+
+    .arrows {
+        font-size: 5rem !important;
+    }
+
+    ion-icon {
+        padding: 0.1em 0 !important;
+    }
+
+    input  {
+        text-align: center;
+        padding: 0 !important;
+    }
+}

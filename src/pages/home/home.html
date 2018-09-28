@@ -9,26 +9,17 @@
 </ion-header>
 
 <ion-content padding class="page-home">
-    <ion-grid>
-        <ion-row align-items-center justify-content-center>
-            <button ion-fab 
-                    (click)="increase()"
-                    tappable>
-              <ion-icon name='arrow-up'></ion-icon>
-            </button>
-        </ion-row>
+  <car *ngFor="let car of cars; let i = index" 
+    [car]="car" 
+    [isOpen]="isOpenArray[i]"
+    (isOpenChange)="isOpenChange($event, i)">
+  </car>
 
-        <ion-row align-items-center justify-content-center class="floor" *ngFor="let f of floorO | async">
-          {{f?.currentFloor}}
-        </ion-row>
-
-        <ion-row align-items-center justify-content-center>
-            <button ion-fab 
-                    (click)="decrease()"
-                    tappable>
-              <ion-icon name='arrow-down'></ion-icon>
-            </button>
-        </ion-row>
-
-      </ion-grid>
+  <ion-footer no-border>
+    <ion-card (click)="addNewCar()" class="add-card">
+        <ion-card-content>
+            <ion-icon name="add" color="white"></ion-icon>
+        </ion-card-content>
+    </ion-card>
+  </ion-footer>
 </ion-content>

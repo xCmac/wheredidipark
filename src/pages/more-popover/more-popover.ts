@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { App, IonicPage, NavController, NavParams } from 'ionic-angular';
+import { App, IonicPage, NavController, ViewController, NavParams } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 
@@ -11,18 +11,16 @@ import { AngularFireAuth } from 'angularfire2/auth';
 export class MorePopoverPage {
 
   constructor(public navCtrl: NavController, 
+              public viewCtrl: ViewController,
               public navParams: NavParams, 
               private afAuth: AngularFireAuth,
               private app: App) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MorePopoverPage');
-  }
-
   logout() {
     this.afAuth.auth.signOut()
     .then(() => {
+      this.viewCtrl.dismiss();
       this.app.getActiveNavs()[0].setRoot('LoginPage');
     })
     .catch(e => {

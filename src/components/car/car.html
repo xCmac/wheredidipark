@@ -1,0 +1,55 @@
+<ion-card [style.backgroundColor]="carColor" *ngIf="!isOpen" (click)="toggleIsOpen()" (press)="confirmDeleteCar()">
+  <ion-row>
+    <ion-col col-4 align-items-center justify-content-center class="floor">
+      <ion-card-content>
+        {{theCar.currentFloor}}
+      </ion-card-content>
+    </ion-col>
+    <ion-col class="car-info">
+      <div class="car-name">
+        {{theCar.name.toUpperCase()}}
+      </div>
+      <div>
+        {{theCar.lastUpdate | date:'shortDate'}}
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-card>
+<ion-card [style.backgroundColor]="carColor" *ngIf="isOpen">
+  <ion-row align-items-center justify-content-center (click)="toggleIsOpen()">
+    <ion-icon md="md-arrow-dropup" ios="ios-arrow-up" class="close"></ion-icon>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-row align-items-center justify-content-center class="floor">
+        <ion-card-content>
+          <div>
+              {{theCar.currentFloor}}
+          </div>
+        </ion-card-content>
+      </ion-row>
+      <ion-row justify-content-center>
+          <button class="color-buttons" [style.backgroundColor]="colors.red" (click)="setCarColor(colors.red)"></button>
+          <button class="color-buttons" [style.backgroundColor]="colors.orange" (click)="setCarColor(colors.orange)"></button>
+          <button class="color-buttons" [style.backgroundColor]="colors.yellow" (click)="setCarColor(colors.yellow)"></button>
+          <button class="color-buttons" [style.backgroundColor]="colors.blue" (click)="setCarColor(colors.blue)"></button>
+          <button class="color-buttons" [style.backgroundColor]="colors.green" (click)="setCarColor(colors.green)"></button>
+      </ion-row>
+      <ion-row align-items-center justify-content-center class="edit-car-name">
+          {{theCar.name.toUpperCase()}}
+      </ion-row>
+    </ion-col>
+    <ion-col col-4>
+      <ion-row align-items-center justify-content-center align-self-stretch>
+        <button icon-only (click)="increase()" [style.backgroundColor]="carColor">
+            <ion-icon name="arrow-up" class="arrows"></ion-icon>
+        </button>
+      </ion-row>
+      <ion-row align-items-center justify-content-center align-self-stretch>
+        <button icon-only (click)="decrease()" [style.backgroundColor]="carColor">
+            <ion-icon name="arrow-down" class="arrows"></ion-icon>
+        </button>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+</ion-card>

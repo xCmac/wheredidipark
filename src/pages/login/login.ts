@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { User, UserInfo } from '@firebase/auth-types';
 
-import { FloorProvider } from '../../providers/floor/floor';
+import { CarProvider } from '../../providers/car/car';
 
 @IonicPage()
 @Component({
@@ -18,7 +18,6 @@ export class LoginPage {
 
   isLogin: boolean = true;
 
-  
   email: string;
   password: string;
 
@@ -34,9 +33,16 @@ export class LoginPage {
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private toastCtrl: ToastController,
-    private floorProvider: FloorProvider) {
+    private carProvider: CarProvider) {
     
     this.usersCollection = this.afs.collection('users/');
+    this.afAuth.authState.subscribe(user => {
+      if(user) {
+        this.user = user;
+        this.carProvider.setReferences();
+        this.navCtrl.setRoot('HomePage');
+      }
+    });
   }
 
   ngOnInit() {
@@ -52,21 +58,17 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
-    this.afAuth.authState.subscribe(user => {
-      if(user) {
-        this.floorProvider.setReferences();
-        this.navCtrl.setRoot('TabsPage');
-      }
-    });
+    if(this.user) {
+      this.navCtrl.setRoot('HomePage');
+    }
   }
 
   async login() {
     try {
       this.user = await this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password);
       if (this.user) {
-        console.log(this.user);
-        this.navCtrl.setRoot('TabsPage');
-        this.floorProvider.setReferences();
+        this.navCtrl.setRoot('HomePage');
+        this.carProvider.setReferences();
       }
     } catch (e) {
       this.presentToast(e);
@@ -86,9 +88,8 @@ export class LoginPage {
                                     photoURL: this.user.photoURL, 
                                     providerId: this.user.providerId
                                   });
-        this.floorProvider.setReferences();
-        this.floorProvider.updateFloor(1);
-        this.navCtrl.setRoot('TabsPage');
+        this.carProvider.setReferences();
+        this.navCtrl.setRoot('HomePage');
       }
     } catch (e) {
       this.presentToast(e);
